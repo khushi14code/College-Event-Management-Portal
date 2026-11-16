@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Management Portal</title>
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }   
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        
+        .hero {
+            background-color: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 2%;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+        }
+
+        
+        section {
+            padding: 25px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 5px;
+        }
+
+        
+        .events-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 280px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .event-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .event-card p {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .badge-fee {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        
+        .table-container {
+            overflow-x: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f9fafb;
+        }
+
+        
+        .form-card {
+            background-color: white;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+        }
+
+        
+        .message-box {
+            display: none;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .message-box.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        .message-box.success {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #4ade80;
+        }
+
+        
+        .faq-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        details {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+        }
+
+        summary {
+            font-weight: 600;
+            color: #1e3a8a;
+            cursor: pointer;
+        }
+
+        details p {
+            margin-top: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        
+        footer {
+            background-color: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        
+         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .event-card {
+                width: 100%;
+            }  
+         }
+         
+    </style>
+</head>
+<body>
+
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                🎓 Campus Event Portal
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#register">Register</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Annual College Festival 2026</h1>
+            <p>Join us for technical competitions, workshops, and cultural events!</p>
+        </div>
+    </section>
+
+    
+    <section id="events" class="container">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="events-grid">
+            
+            <div class="event-card">
+                <h3>Coding Hackathon</h3>
+                <p><strong>Venue:</strong> Lab 3</p>
+                <p><strong>Speaker:</strong> Dr. A. Sharma</p>
+                <p>Showcase coding skills & solve real-world problems.</p>
+                <div class="badge-fee">Fee: ₹200</div>
+            </div>
+
+            <div class="event-card">
+                <h3>Battle of the Bands</h3>
+                <p><strong>Venue:</strong> Main Auditorium</p>
+                <p><strong>Speaker:</strong> Mr. Vikram Singh</p>
+                <p>A musical competition featuring college bands.</p>
+                <div class="badge-fee">Fee: ₹150</div>
+            </div>
+
+            <div class="event-card">
+                <h3>Tech Quiz</h3>
+                <p><strong>Venue:</strong> Hall A</p>
+                <p><strong>Speaker:</strong> Prof. R. Verma</p>
+                <p>Test your general tech knowledge & win prizes.</p>
+                <div class="badge-fee">Fee: Free</div>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <section id="schedule" class="container">
+        <h2 class="section-title">Event Schedule</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time Slot</th>
+                        <th>Event Name</th>
+                        <th>Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09:30 AM - 12:30 PM</td>
+                        <td>Coding Hackathon</td>
+                        <td>Lab 3</td>
+                    </tr>
+                    <tr>
+                        <td>01:00 PM - 03:00 PM</td>
+                        <td>Tech Quiz</td>
+                        <td>Hall A</td>
+                    </tr>
+                    <tr>
+                        <td>03:30 PM - 06:00 PM</td>
+                        <td>Battle of the Bands</td>
+                        <td>Main Auditorium</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    
+    <section id="register" class="container">
+        <h2 class="section-title">Event Registration</h2>
+        <div class="form-card">
+            <form id="registrationForm">
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="student@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number (10 Digits)</label>
+                    <input type="text" id="phone" placeholder="e.g. 9876543210" maxlength="10">
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <select id="branch">
+                        <option value="">-- Select Branch --</option>
+                        <option value="CSE">Computer Science (CSE)</option>
+                        <option value="ECE">Electronics (ECE)</option>
+                        <option value="ME">Mechanical (ME)</option>
+                        <option value="CE">Civil (CE)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year of Study</label>
+                    <select id="year">
+                        <option value="">-- Select Year --</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventSelect">Select Event</label>
+                    <select id="eventSelect">
+                        <option value="">-- Select Event --</option>
+                        <option value="Coding Hackathon">Coding Hackathon (Fee: ₹200)</option>
+                        <option value="Battle of the Bands">Battle of the Bands (Fee: ₹150)</option>
+                        <option value="Tech Quiz">Tech Quiz (Fee: Free)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Registration</button>
+                <div id="messageBox" class="message-box"></div>
+
+            </form>
+        </div>
+    </section>
+
+    <section id="faq" class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <details>
+                <summary>Who can participate in these events?</summary>
+                <p>All registered students of the college with a valid student ID can participate.</p>
+            </details>
+            <details>
+                <summary>How do I pay the event fee?</summary>
+                <p>Event fees can be paid at the registration desk on the morning of the event.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 College Event Management Portal</p>
+        </div>
+    </footer>
+
+    
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("fullName").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+            var branch = document.getElementById("branch").value;
+            var year = document.getElementById("year").value;
+            var eventName = document.getElementById("eventSelect").value;
+            var messageBox = document.getElementById("messageBox");
+
+            if (name === "" || email === "" || phone === "" || branch === "" || year === "" || eventName === "") {
+                messageBox.style.display = "block";
+                messageBox.className = "message-box error";
+                messageBox.innerText = "Please fill in all fields.";
+                return;
+            }
+
+            if (email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+                messageBox.style.display = "block";
+                messageBox.className = "message-box error";
+                messageBox.innerText = "Please enter a valid email address.";
+                return;
+            }
+
+            if (phone.length !== 10 || isNaN(phone)) {
+                messageBox.style.display = "block";
+                messageBox.className = "message-box error";
+                messageBox.innerText = "Please enter a valid 10-digit phone number.";
+                return;
+            }
+
+            messageBox.style.display = "block";
+            messageBox.className = "message-box success";
+            messageBox.innerHTML = "Registration Successful! Thank you " + name + " for registering for " + eventName + ".";
+
+            document.getElementById("registrationForm").reset();
+        });
+    </script>
+</body>
+</html>
